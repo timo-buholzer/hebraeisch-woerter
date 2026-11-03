@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hebräisch Wörter ISTL Lvl 3</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Karla:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#FCFCFA; --surface:#FFFFFF; --ink:#202532; --muted:#68717F;
+  --accent:#2B55A2; --accent-soft:#E8EEF8; --rule:#E5E7EB; --chip:#F0F3F8;
+  --ring:rgba(43,85,162,.35); --ok:#1E7B4F;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#13161E; --surface:#1A1F2A; --ink:#E8EBF1; --muted:#98A1B0;
+    --accent:#8FB2EE; --accent-soft:#1F2A3E; --rule:#2A3040; --chip:#212736;
+    --ring:rgba(143,178,238,.4); --ok:#5BBE8C;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#13161E; --surface:#1A1F2A; --ink:#E8EBF1; --muted:#98A1B0;
+  --accent:#8FB2EE; --accent-soft:#1F2A3E; --rule:#2A3040; --chip:#212736;
+  --ring:rgba(143,178,238,.4); --ok:#5BBE8C;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5.5rem)}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Karla",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:1rem; line-height:1.5;
+}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); background:var(--bg); z-index:10}
+.wrap{max-width:46rem; margin:0 auto; padding:0 1.1rem 4rem}
+header.hero{padding:2.4rem 0 1.2rem}
+.hero h1{
+  font-family:"Frank Ruhl Libre","Noto Serif Hebrew","Times New Roman",serif;
+  font-weight:700; font-size:clamp(1.9rem,6vw,2.7rem); line-height:1.15; margin:0;
+}
+.hero p{margin:.5rem 0 0; color:var(--muted); max-width:34rem}
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:9;
+  background:var(--bg); padding:.7rem 0 .7rem;
+}
+.searchrow{display:flex; gap:.5rem; align-items:stretch}
+.searchbox{position:relative; flex:1}
+.searchbox input{
+  width:100%; padding:.72rem 2.6rem .72rem 2.6rem;
+  font:inherit; font-size:1.05rem; color:var(--ink);
+  background:var(--chip); border:0; border-radius:.65rem;
+}
+.searchbox input::placeholder{color:var(--muted)}
+.searchbox input:focus{outline:2px solid var(--ring); outline-offset:1px}
+.searchbox .lens{position:absolute; left:.85rem; top:50%; transform:translateY(-50%); width:1.05rem; height:1.05rem; color:var(--muted); pointer-events:none}
+.searchbox button.clear{
+  position:absolute; right:.45rem; top:50%; transform:translateY(-50%);
+  border:0; background:transparent; color:var(--muted); font-size:1.3rem; line-height:1;
+  padding:.35rem .5rem; cursor:pointer; border-radius:.4rem; display:none;
+}
+.searchbox button.clear:focus-visible{outline:2px solid var(--ring)}
+.searchbox.hasvalue button.clear{display:block}
+.scanbtn{
+  display:flex; align-items:center; gap:.4rem;
+  font:inherit; font-weight:600; font-size:.95rem; color:var(--accent);
+  background:var(--accent-soft); border:1px solid transparent; border-radius:.65rem;
+  padding:0 .9rem; cursor:pointer;
+}
+.scanbtn:focus-visible{outline:2px solid var(--ring)}
+.scanbtn svg{width:1.15rem; height:1.15rem}
+#scanfile{display:none}
+.scanner{
+  margin:1.1rem 0 0; padding:1rem; border:1px solid var(--rule); border-radius:.75rem;
+  background:var(--surface); display:none;
+}
+.scanner.show{display:block}
+.scanner .shead{display:flex; justify-content:space-between; align-items:baseline; gap:1rem}
+.scanner h2{margin:0; font-size:1.05rem}
+.scanner .close{border:0; background:none; color:var(--muted); font-size:1.2rem; cursor:pointer; padding:.2rem .4rem; border-radius:.4rem}
+.scanner .close:focus-visible{outline:2px solid var(--ring)}
+#scanstatus{color:var(--muted); font-size:.92rem; margin:.4rem 0 0}
+#scanresults{list-style:none; margin:.6rem 0 0; padding:0}
+.scard{
+  display:grid; grid-template-columns:auto 1fr; gap:.15rem 1rem; align-items:baseline;
+  padding:.55rem 0;
+}
+.scard .she{
+  grid-row:1 / span 2; font-family:"Frank Ruhl Libre","Noto Serif Hebrew","Times New Roman",serif;
+  font-size:1.5rem; direction:rtl;
+}
+.scard .sde{font-weight:600}
+.scard .ssub{color:var(--muted); font-size:.88rem}
+.scard .ssub a{color:var(--accent)}
+.scard .sde.ok{color:var(--ok)}
+.scanhint{color:var(--muted); font-size:.88rem; margin:.5rem 0 0}
+section.letter{padding-top:2.75rem}
+.letterhead{display:flex; align-items:baseline; gap:.75rem; padding-bottom:.1rem}
+.letterhead h2{
+  font-family:"Frank Ruhl Libre","Noto Serif Hebrew","Times New Roman",serif;
+  font-weight:700; font-size:2rem; margin:0; line-height:1;
+}
+ul.rows{list-style:none; margin:0; padding:0}
+.row{
+  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr) auto;
+  gap:.3rem 1rem; align-items:baseline;
+  padding:.6rem .15rem;
+}
+.row .de{font-weight:600}
+.row .tr{color:var(--muted); font-style:italic}
+.row .he{
+  font-family:"Frank Ruhl Libre","Noto Serif Hebrew","Times New Roman",serif;
+  font-size:1.45rem; line-height:1.25; text-align:right; white-space:nowrap;
+}
+.row:hover{background:var(--chip); border-radius:.45rem}
+.row.hidden, section.letter.hidden{display:none}
+#noresults{display:none; margin-top:2.2rem; color:var(--muted)}
+#noresults.show{display:block}
+#noresults strong{color:var(--ink)}
+@media (max-width:540px){
+  .row{grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"de he" "tr he"}
+  .row .de{grid-area:de}
+  .row .tr{grid-area:tr; font-size:.88rem}
+  .row .he{grid-area:he; align-self:center}
+  .scanbtn span{display:none}
+  .scanbtn{padding:0 .8rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <h1>Hebräisch Wörter ISTL Lvl 3</h1>
+    <p>248 Wörter, alphabetisch nach der deutschen Übersetzung. Suche auf Deutsch, in der Umschrift oder auf Hebräisch — oder fotografiere ein Wort.</p>
+  </header>
+
+  <div class="topbar">
+    <div class="searchrow">
+      <div class="searchbox" id="searchbox">
+        <svg class="lens" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+        <input id="q" type="search" placeholder="Suchen, z. B. Wasser, Majim oder מים" autocomplete="off" aria-label="Wortschatz durchsuchen">
+        <button class="clear" id="clearbtn" type="button" aria-label="Suche löschen">×</button>
+      </div>
+      <button class="scanbtn" id="scanbtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <span>Scannen</span>
+      </button>
+      <input id="scanfile" type="file" accept="image/*">
+    </div>
+  </div>
+
+  <div class="scanner" id="scanner">
+    <div class="shead">
+      <h2>Foto-Scanner</h2>
+      <button class="close" id="scanclose" type="button" aria-label="Scanner schliessen">×</button>
+    </div>
+    <p id="scanstatus"></p>
+    <ul id="scanresults"></ul>
+    <p class="scanhint">Am besten gedruckte Wörter nah, gerade und bei gutem Licht fotografieren. Grün = Wort aus deiner Liste.</p>
+  </div>
+
+  <main id="list">
+<section class="letter" id="A"><div class="letterhead"><h2>A</h2></div><ul class="rows"><li class="row" data-s="abend nacht erev laila ערב"><span class="de">Abend (Nacht)</span><span class="tr">Erev (Laila)</span><span class="he" lang="he" dir="rtl">עֶרֶב</span></li><li class="row" data-s="allein levad לבד"><span class="de">allein</span><span class="tr">Levad</span><span class="he" lang="he" dir="rtl">לְבַד</span></li><li class="row" data-s="anziehen er zog an lavasch לבש"><span class="de">anziehen (er zog an)</span><span class="tr">Lavasch</span><span class="he" lang="he" dir="rtl">לָבַשׁ</span></li><li class="row" data-s="arbeit avoda עבודה"><span class="de">Arbeit</span><span class="tr">Avoda</span><span class="he" lang="he" dir="rtl">עֲבוֹדָה</span></li><li class="row" data-s="arger zorn ka as כעס"><span class="de">Ärger, Zorn</span><span class="tr">Ka’as</span><span class="he" lang="he" dir="rtl">כַּעַס</span></li><li class="row" data-s="armee zava צבא"><span class="de">Armee</span><span class="tr">Zava</span><span class="he" lang="he" dir="rtl">צָבָא</span></li><li class="row" data-s="auf wiedersehen lehitra ot להתראות"><span class="de">auf Wiedersehen</span><span class="tr">Lehitra’ot</span><span class="he" lang="he" dir="rtl">לְהִתְרָאוֹת</span></li><li class="row" data-s="auf uber al על"><span class="de">auf, über</span><span class="tr">Al</span><span class="he" lang="he" dir="rtl">עַל</span></li><li class="row" data-s="auge ajin עין"><span class="de">Auge</span><span class="tr">Ajin</span><span class="he" lang="he" dir="rtl">עַיִן</span></li><li class="row" data-s="ausgezeichnet mezujan מצין"><span class="de">ausgezeichnet</span><span class="tr">Mezujan</span><span class="he" lang="he" dir="rtl">מְצֻיָּן</span></li><li class="row" data-s="auswahl mivchar מבחר"><span class="de">Auswahl</span><span class="tr">Mivchar</span><span class="he" lang="he" dir="rtl">מִבְחָר</span></li></ul></section>
+<section class="letter" id="B"><div class="letterhead"><h2>B</h2></div><ul class="rows"><li class="row" data-s="bahngleis bahn weg mesila מסלה"><span class="de">Bahngleis, Bahn, Weg</span><span class="tr">Mesila</span><span class="he" lang="he" dir="rtl">מְסִלָּה</span></li><li class="row" data-s="ball kugel kadur כדור"><span class="de">Ball, Kugel</span><span class="tr">Kadur</span><span class="he" lang="he" dir="rtl">כַּדּוּר</span></li><li class="row" data-s="bank bank בנק"><span class="de">Bank</span><span class="tr">Bank</span><span class="he" lang="he" dir="rtl">בַּנְק</span></li><li class="row" data-s="bar dov דב"><span class="de">Bär</span><span class="tr">Dov</span><span class="he" lang="he" dir="rtl">דֹּב</span></li><li class="row" data-s="barin duba דבה"><span class="de">Bärin</span><span class="tr">Duba</span><span class="he" lang="he" dir="rtl">דֻּבָּה</span></li><li class="row" data-s="baum ez עץ"><span class="de">Baum</span><span class="tr">Ez</span><span class="he" lang="he" dir="rtl">עֵץ</span></li><li class="row" data-s="baume ezim עצים"><span class="de">Bäume</span><span class="tr">Ezim</span><span class="he" lang="he" dir="rtl">עֵצִים</span></li><li class="row" data-s="bericht rechenschaft din wecheschbon דין וחשבון"><span class="de">Bericht, Rechenschaft</span><span class="tr">Din-wecheschbon</span><span class="he" lang="he" dir="rtl">דִּין וְחֶשְׁבּוֹן</span></li><li class="row" data-s="biene dvora דבורה"><span class="de">Biene</span><span class="tr">Dvora</span><span class="he" lang="he" dir="rtl">דְּבוֹרָה</span></li><li class="row" data-s="bitte bevakascha בבקשה"><span class="de">bitte</span><span class="tr">Bevakascha</span><span class="he" lang="he" dir="rtl">בְּבַקָּשָׁה</span></li><li class="row" data-s="bitter mar מר"><span class="de">bitter</span><span class="tr">Mar</span><span class="he" lang="he" dir="rtl">מַר</span></li><li class="row" data-s="blau kachol כחול"><span class="de">blau</span><span class="tr">Kachol</span><span class="he" lang="he" dir="rtl">כָּחוֹל</span></li><li class="row" data-s="blut dam דם"><span class="de">Blut</span><span class="tr">Dam</span><span class="he" lang="he" dir="rtl">דָּם</span></li><li class="row" data-s="brief michtav מכתב"><span class="de">Brief</span><span class="tr">Michtav</span><span class="he" lang="he" dir="rtl">מִכְתָּב</span></li><li class="row" data-s="brieftrager davar דור"><span class="de">Briefträger</span><span class="tr">Davar</span><span class="he" lang="he" dir="rtl">דַּוָּר</span></li><li class="row" data-s="brot lechem לחם"><span class="de">Brot</span><span class="tr">Lechem</span><span class="he" lang="he" dir="rtl">לֶחֶם</span></li><li class="row" data-s="brotchen lachmanija לחמניה"><span class="de">Brötchen</span><span class="tr">Lachmanija</span><span class="he" lang="he" dir="rtl">לַחְמָנִיָּה</span></li><li class="row" data-s="bruder ach אח"><span class="de">Bruder</span><span class="tr">Ach</span><span class="he" lang="he" dir="rtl">אָח</span></li><li class="row" data-s="brunnen be er באר"><span class="de">Brunnen</span><span class="tr">Be’er</span><span class="he" lang="he" dir="rtl">בְּאֵר</span></li><li class="row" data-s="buchrolle megila מגלה"><span class="de">Buchrolle</span><span class="tr">Megila</span><span class="he" lang="he" dir="rtl">מְגִלָּה</span></li><li class="row" data-s="bundeslade aron habrit ארון הברית"><span class="de">Bundeslade</span><span class="tr">Aron haBrit</span><span class="he" lang="he" dir="rtl">אֲרוֹן הַבְּרִית</span></li></ul></section>
+<section class="letter" id="D"><div class="letterhead"><h2>D</h2></div><ul class="rows"><li class="row" data-s="dach gag גג"><span class="de">Dach</span><span class="tr">Gag</span><span class="he" lang="he" dir="rtl">גַּג</span></li><li class="row" data-s="dame frau gveret גברת"><span class="de">Dame, Frau</span><span class="tr">Gveret</span><span class="he" lang="he" dir="rtl">גְּבֶרֶת</span></li><li class="row" data-s="davidstern schild davids magen david מגן דוד"><span class="de">Davidstern („Schild Davids“)</span><span class="tr">Magen David</span><span class="he" lang="he" dir="rtl">מָגֵן דָּוִד</span></li><li class="row" data-s="delfin dolfin דולפין"><span class="de">Delfin</span><span class="tr">Dolfin</span><span class="he" lang="he" dir="rtl">דּוֹלְפִין</span></li><li class="row" data-s="delikatessen sussigkeiten mat amim מטעמים"><span class="de">Delikatessen, Süssigkeiten</span><span class="tr">Mat’amim</span><span class="he" lang="he" dir="rtl">מַטְעַמִּים</span></li><li class="row" data-s="depression dika on דכאון"><span class="de">Depression</span><span class="tr">Dika’on</span><span class="he" lang="he" dir="rtl">דִּכָּאוֹן</span></li><li class="row" data-s="der herr adonai = mein herr adon אדון"><span class="de">der Herr (Adonai = „mein Herr“)</span><span class="tr">Adon</span><span class="he" lang="he" dir="rtl">אָדוֹן</span></li><li class="row" data-s="deshalb darum lachen לכן"><span class="de">deshalb, darum</span><span class="tr">Lachen</span><span class="he" lang="he" dir="rtl">לָכֵן</span></li><li class="row" data-s="deutschland germanja גרמניה"><span class="de">Deutschland</span><span class="tr">Germanja</span><span class="he" lang="he" dir="rtl">גֶּרְמַנְיָה</span></li><li class="row" data-s="dieb ganav גנב"><span class="de">Dieb</span><span class="tr">Ganav</span><span class="he" lang="he" dir="rtl">גַּנָּב</span></li><li class="row" data-s="dorf kfar כפר"><span class="de">Dorf</span><span class="tr">Kfar</span><span class="he" lang="he" dir="rtl">כְּפָר</span></li><li class="row" data-s="dunkelheit choschech חשך"><span class="de">Dunkelheit</span><span class="tr">Choschech</span><span class="he" lang="he" dir="rtl">חֹשֶׁךְ</span></li></ul></section>
+<section class="letter" id="E"><div class="letterhead"><h2>E</h2></div><ul class="rows"><li class="row" data-s="ehemann gotze ba al בעל"><span class="de">Ehemann; Götze</span><span class="tr">Ba’al</span><span class="he" lang="he" dir="rtl">בַּעַל</span></li><li class="row" data-s="ehre kavod כבוד"><span class="de">Ehre</span><span class="tr">Kavod</span><span class="he" lang="he" dir="rtl">כָּבוֹד</span></li><li class="row" data-s="ei beiza ביצה"><span class="de">Ei</span><span class="tr">Beiza</span><span class="he" lang="he" dir="rtl">בֵּיצָה</span></li><li class="row" data-s="ein wenig me at מעט"><span class="de">ein wenig</span><span class="tr">Me’at</span><span class="he" lang="he" dir="rtl">מְעַט</span></li><li class="row" data-s="engel mal ach מלאך"><span class="de">Engel</span><span class="tr">Mal’ach</span><span class="he" lang="he" dir="rtl">מַלְאָךְ</span></li><li class="row" data-s="erde adama אדמה"><span class="de">Erde</span><span class="tr">Adama</span><span class="he" lang="he" dir="rtl">אֲדָמָה</span></li><li class="row" data-s="erlosung ge ula גאולה"><span class="de">Erlösung</span><span class="tr">Ge’ula</span><span class="he" lang="he" dir="rtl">גְּאוּלָה</span></li><li class="row" data-s="erwachsen mevugar מבוגר"><span class="de">erwachsen</span><span class="tr">Mevugar</span><span class="he" lang="he" dir="rtl">מְבוּגָר</span></li><li class="row" data-s="essen ochel אוכל"><span class="de">Essen</span><span class="tr">Ochel</span><span class="he" lang="he" dir="rtl">אוֹכֶל</span></li><li class="row" data-s="exil diaspora gola גולה"><span class="de">Exil, Diaspora</span><span class="tr">Gola</span><span class="he" lang="he" dir="rtl">גּוֹלָה</span></li></ul></section>
+<section class="letter" id="F"><div class="letterhead"><h2>F</h2></div><ul class="rows"><li class="row" data-s="fahrt reise masa מסע"><span class="de">Fahrt, Reise</span><span class="tr">Masa</span><span class="he" lang="he" dir="rtl">מַסָּע</span></li><li class="row" data-s="familie mischpacha משפחה"><span class="de">Familie</span><span class="tr">Mischpacha</span><span class="he" lang="he" dir="rtl">מִשְׁפָּחָה</span></li><li class="row" data-s="fast beinahe kim at כמעט"><span class="de">fast, beinahe</span><span class="tr">Kim’at</span><span class="he" lang="he" dir="rtl">כִּמְעַט</span></li><li class="row" data-s="feind ojev אויב"><span class="de">Feind</span><span class="tr">Ojev</span><span class="he" lang="he" dir="rtl">אוֹיֵב</span></li><li class="row" data-s="feld sade שדה"><span class="de">Feld</span><span class="tr">Sade</span><span class="he" lang="he" dir="rtl">שָׂדֶה</span></li><li class="row" data-s="fest e mo ed chag מועד חג"><span class="de">Fest(e)</span><span class="tr">Mo’ed, Chag</span><span class="he" lang="he" dir="rtl">מוֹעֵד, חַג</span></li><li class="row" data-s="feuer esch אש"><span class="de">Feuer</span><span class="tr">Esch</span><span class="he" lang="he" dir="rtl">אֵשׁ</span></li><li class="row" data-s="fisch dag דג"><span class="de">Fisch</span><span class="tr">Dag</span><span class="he" lang="he" dir="rtl">דָּג</span></li><li class="row" data-s="fischer dajag דיג"><span class="de">Fischer</span><span class="tr">Dajag</span><span class="he" lang="he" dir="rtl">דַּיָּג</span></li><li class="row" data-s="flagge fahne degel דגל"><span class="de">Flagge, Fahne</span><span class="tr">Degel</span><span class="he" lang="he" dir="rtl">דֶּגֶל</span></li><li class="row" data-s="flasche bakbuk בקבוק"><span class="de">Flasche</span><span class="tr">Bakbuk</span><span class="he" lang="he" dir="rtl">בַּקְבּוּק</span></li><li class="row" data-s="fleck ketem כתם"><span class="de">Fleck</span><span class="tr">Ketem</span><span class="he" lang="he" dir="rtl">כֶּתֶם</span></li><li class="row" data-s="fleisch basar בשר"><span class="de">Fleisch</span><span class="tr">Basar</span><span class="he" lang="he" dir="rtl">בָּשָׂר</span></li><li class="row" data-s="friede schalom שלום"><span class="de">Friede</span><span class="tr">Schalom</span><span class="he" lang="he" dir="rtl">שָׁלוֹם</span></li><li class="row" data-s="frucht pri פרי"><span class="de">Frucht</span><span class="tr">Pri</span><span class="he" lang="he" dir="rtl">פְּרִי</span></li><li class="row" data-s="fruhling aviv אביב"><span class="de">Frühling</span><span class="tr">Aviv</span><span class="he" lang="he" dir="rtl">אָבִיב</span></li><li class="row" data-s="fur immer letamid לתמיד"><span class="de">für immer</span><span class="tr">Letamid</span><span class="he" lang="he" dir="rtl">לְתָמִיד</span></li></ul></section>
+<section class="letter" id="G"><div class="letterhead"><h2>G</h2></div><ul class="rows"><li class="row" data-s="gabel mazleg מזלג"><span class="de">Gabel</span><span class="tr">Mazleg</span><span class="he" lang="he" dir="rtl">מַזְלֵג</span></li><li class="row" data-s="garten gina gan גנה גן"><span class="de">Garten</span><span class="tr">Gina / Gan</span><span class="he" lang="he" dir="rtl">גִּנָּה / גַּן</span></li><li class="row" data-s="garten eden gan eden גן עדן"><span class="de">Garten Eden</span><span class="tr">Gan-Eden</span><span class="he" lang="he" dir="rtl">גַּן עֵדֶן</span></li><li class="row" data-s="gast ore ach אורח"><span class="de">Gast</span><span class="tr">Ore’ach</span><span class="he" lang="he" dir="rtl">אוֹרֵחַ</span></li><li class="row" data-s="gebaude binjan בנין"><span class="de">Gebäude</span><span class="tr">Binjan</span><span class="he" lang="he" dir="rtl">בִּנְיָן</span></li><li class="row" data-s="gegenuber mul מול"><span class="de">gegenüber</span><span class="tr">Mul</span><span class="he" lang="he" dir="rtl">מוּל</span></li><li class="row" data-s="geld silber kesef כסף"><span class="de">Geld, Silber</span><span class="tr">Kesef</span><span class="he" lang="he" dir="rtl">כֶּסֶף</span></li><li class="row" data-s="glace glida גלידה"><span class="de">Glace</span><span class="tr">Glida</span><span class="he" lang="he" dir="rtl">גְּלִידָה</span></li><li class="row" data-s="glas becher kos כוס"><span class="de">Glas, Becher</span><span class="tr">Kos</span><span class="he" lang="he" dir="rtl">כּוֹס</span></li><li class="row" data-s="glaube emuna אמונה"><span class="de">Glaube</span><span class="tr">Emuna</span><span class="he" lang="he" dir="rtl">אֱמוּנָה</span></li><li class="row" data-s="gnade chesed חסד"><span class="de">Gnade</span><span class="tr">Chesed</span><span class="he" lang="he" dir="rtl">חֶסֶד</span></li><li class="row" data-s="gold kupfer zahav nechoschet זהב נחשת"><span class="de">Gold / Kupfer</span><span class="tr">Zahav / Nechoschet</span><span class="he" lang="he" dir="rtl">זָהָב / נְחֹשֶׁת</span></li><li class="row" data-s="gott elohim אלוהים"><span class="de">Gott</span><span class="tr">Elohim</span><span class="he" lang="he" dir="rtl">אֱלוֹהִים</span></li><li class="row" data-s="gras rasen desche דשא"><span class="de">Gras, Rasen</span><span class="tr">Desche</span><span class="he" lang="he" dir="rtl">דֶּשֶׁא</span></li><li class="row" data-s="gras rasen esev עשב"><span class="de">Gras, Rasen</span><span class="tr">Esev</span><span class="he" lang="he" dir="rtl">עֵשֶׂב</span></li><li class="row" data-s="grenze gvul גבול"><span class="de">Grenze</span><span class="tr">Gvul</span><span class="he" lang="he" dir="rtl">גְּבוּל</span></li><li class="row" data-s="gross gadol גדול"><span class="de">gross</span><span class="tr">Gadol</span><span class="he" lang="he" dir="rtl">גָּדוֹל</span></li><li class="row" data-s="grundstuck feld migrasch מגרש"><span class="de">Grundstück, Feld</span><span class="tr">Migrasch</span><span class="he" lang="he" dir="rtl">מִגְרָשׁ</span></li><li class="row" data-s="gut schlecht bose tov ra טוב רע"><span class="de">gut / schlecht, böse</span><span class="tr">Tov / Ra</span><span class="he" lang="he" dir="rtl">טוֹב / רַע</span></li><li class="row" data-s="gute nacht laila tov לילה טוב"><span class="de">Gute Nacht</span><span class="tr">Laila tov</span><span class="he" lang="he" dir="rtl">לַיְלָה טוֹב</span></li><li class="row" data-s="guten morgen boker tov בוקר טוב"><span class="de">Guten Morgen</span><span class="tr">Boker tov</span><span class="he" lang="he" dir="rtl">בּוֹקֶר טוֹב</span></li></ul></section>
+<section class="letter" id="H"><div class="letterhead"><h2>H</h2></div><ul class="rows"><li class="row" data-s="haus bajit בית"><span class="de">Haus</span><span class="tr">Bajit</span><span class="he" lang="he" dir="rtl">בַּיִת</span></li><li class="row" data-s="hebraisch ivrit עברית"><span class="de">Hebräisch</span><span class="tr">Ivrit</span><span class="he" lang="he" dir="rtl">עִבְרִית</span></li><li class="row" data-s="heilig kadosch קדוש"><span class="de">heilig</span><span class="tr">Kadosch</span><span class="he" lang="he" dir="rtl">קָדוֹשׁ</span></li><li class="row" data-s="herz lev לב"><span class="de">Herz</span><span class="tr">Lev</span><span class="he" lang="he" dir="rtl">לֵב</span></li><li class="row" data-s="herzlich levavi לבבי"><span class="de">herzlich</span><span class="tr">Levavi</span><span class="he" lang="he" dir="rtl">לְבָבִי</span></li><li class="row" data-s="honig dvasch דבש"><span class="de">Honig</span><span class="tr">Dvasch</span><span class="he" lang="he" dir="rtl">דְּבַשׁ</span></li><li class="row" data-s="hund hundin kelev kalba כלב כלבה"><span class="de">Hund / Hündin</span><span class="tr">Kelev / Kalba</span><span class="he" lang="he" dir="rtl">כֶּלֶב / כַּלְבָּה</span></li><li class="row" data-s="hundert 100 mea מאה"><span class="de">hundert (100)</span><span class="tr">Mea</span><span class="he" lang="he" dir="rtl">מֵאָה</span></li><li class="row" data-s="hut mutze kova כובע"><span class="de">Hut, Mütze</span><span class="tr">Kova</span><span class="he" lang="he" dir="rtl">כּוֹבַע</span></li></ul></section>
+<section class="letter" id="I"><div class="letterhead"><h2>I</h2></div><ul class="rows"><li class="row" data-s="in ordnung beseder בסדר"><span class="de">in Ordnung</span><span class="tr">Beseder</span><span class="he" lang="he" dir="rtl">בְּסֵדֶר</span></li><li class="row" data-s="interessiert me unjan מענין"><span class="de">interessiert</span><span class="tr">Me’unjan</span><span class="he" lang="he" dir="rtl">מְעֻנְיָן</span></li></ul></section>
+<section class="letter" id="J"><div class="letterhead"><h2>J</h2></div><ul class="rows"><li class="row" data-s="ja ken כן"><span class="de">ja</span><span class="tr">Ken</span><span class="he" lang="he" dir="rtl">כֵּן</span></li><li class="row" data-s="journalist itonai עתונאי"><span class="de">Journalist</span><span class="tr">Itonai</span><span class="he" lang="he" dir="rtl">עִתּוֹנַאי</span></li><li class="row" data-s="junge frau bachura בחורה"><span class="de">junge Frau</span><span class="tr">Bachura</span><span class="he" lang="he" dir="rtl">בַּחוּרָה</span></li><li class="row" data-s="junger mann bachur בחור"><span class="de">junger Mann</span><span class="tr">Bachur</span><span class="he" lang="he" dir="rtl">בָּחוּר</span></li></ul></section>
+<section class="letter" id="K"><div class="letterhead"><h2>K</h2></div><ul class="rows"><li class="row" data-s="kamel gamal גמל"><span class="de">Kamel</span><span class="tr">Gamal</span><span class="he" lang="he" dir="rtl">גָּמָל</span></li><li class="row" data-s="kampf ma avak מאבק"><span class="de">Kampf</span><span class="tr">Ma’avak</span><span class="he" lang="he" dir="rtl">מַאֲבָק</span></li><li class="row" data-s="kampfen er kampfte lacham לחם"><span class="de">kämpfen (er kämpfte)</span><span class="tr">Lacham</span><span class="he" lang="he" dir="rtl">לָחַם</span></li><li class="row" data-s="kase gvina גבינה"><span class="de">Käse</span><span class="tr">Gvina</span><span class="he" lang="he" dir="rtl">גְּבִינָה</span></li><li class="row" data-s="kelter weinpresse gat גת"><span class="de">Kelter (Weinpresse)</span><span class="tr">Gat</span><span class="he" lang="he" dir="rtl">גַּת</span></li><li class="row" data-s="kirsche duvdevan דבדבן"><span class="de">Kirsche</span><span class="tr">Duvdevan</span><span class="he" lang="he" dir="rtl">דֻּבְדְּבָן</span></li><li class="row" data-s="kissen karit כרית"><span class="de">Kissen</span><span class="tr">Karit</span><span class="he" lang="he" dir="rtl">כָּרִית</span></li><li class="row" data-s="kleber devek דבק"><span class="de">Kleber</span><span class="tr">Devek</span><span class="he" lang="he" dir="rtl">דֶּבֶק</span></li><li class="row" data-s="kleider begadim בגדים"><span class="de">Kleider</span><span class="tr">Begadim</span><span class="he" lang="he" dir="rtl">בְּגָדִים</span></li><li class="row" data-s="kloster minzar מנזר"><span class="de">Kloster</span><span class="tr">Minzar</span><span class="he" lang="he" dir="rtl">מִנְזָר</span></li><li class="row" data-s="knopf kaftor כפתור"><span class="de">Knopf</span><span class="tr">Kaftor</span><span class="he" lang="he" dir="rtl">כַּפְתּוֹר</span></li><li class="row" data-s="konig melech מלך"><span class="de">König</span><span class="tr">Melech</span><span class="he" lang="he" dir="rtl">מֶלֶךְ</span></li><li class="row" data-s="konigin malka מלכה"><span class="de">Königin</span><span class="tr">Malka</span><span class="he" lang="he" dir="rtl">מַלְכָּה</span></li><li class="row" data-s="korper guf גוף"><span class="de">Körper</span><span class="tr">Guf</span><span class="he" lang="he" dir="rtl">גּוּף</span></li><li class="row" data-s="kraft ko ach כח"><span class="de">Kraft</span><span class="tr">Ko’ach</span><span class="he" lang="he" dir="rtl">כֹּחַ</span></li><li class="row" data-s="krankenhaus haus der kranken beit cholim בית־חולים"><span class="de">Krankenhaus („Haus der Kranken“)</span><span class="tr">Beit-Cholim</span><span class="he" lang="he" dir="rtl">בֵּית־חוֹלִים</span></li><li class="row" data-s="krone keter כתר"><span class="de">Krone</span><span class="tr">Keter</span><span class="he" lang="he" dir="rtl">כֶּתֶר</span></li><li class="row" data-s="krug kad כד"><span class="de">Krug</span><span class="tr">Kad</span><span class="he" lang="he" dir="rtl">כַּד</span></li><li class="row" data-s="kuchen uga עוגה"><span class="de">Kuchen</span><span class="tr">Uga</span><span class="he" lang="he" dir="rtl">עוּגָה</span></li></ul></section>
+<section class="letter" id="L"><div class="letterhead"><h2>L</h2></div><ul class="rows"><li class="row" data-s="lamm se שה"><span class="de">Lamm</span><span class="tr">Se</span><span class="he" lang="he" dir="rtl">שֶׂה</span></li><li class="row" data-s="land erez ארץ"><span class="de">Land</span><span class="tr">Erez</span><span class="he" lang="he" dir="rtl">אֶרֶץ</span></li><li class="row" data-s="langsam le at לאט"><span class="de">langsam</span><span class="tr">Le’at</span><span class="he" lang="he" dir="rtl">לְאַט</span></li><li class="row" data-s="leiter fuhrer manhig מנהיג"><span class="de">Leiter, Führer</span><span class="tr">Manhig</span><span class="he" lang="he" dir="rtl">מַנְהִיג</span></li><li class="row" data-s="lernen er lernte lamad למד"><span class="de">lernen (er lernte)</span><span class="tr">Lamad</span><span class="he" lang="he" dir="rtl">לָמַד</span></li><li class="row" data-s="licht or אור"><span class="de">Licht</span><span class="tr">Or</span><span class="he" lang="he" dir="rtl">אוֹר</span></li><li class="row" data-s="liebe ahava אהבה"><span class="de">Liebe</span><span class="tr">Ahava</span><span class="he" lang="he" dir="rtl">אַהֲבָה</span></li></ul></section>
+<section class="letter" id="M"><div class="letterhead"><h2>M</h2></div><ul class="rows"><li class="row" data-s="mann gever גבר"><span class="de">Mann</span><span class="tr">Gever</span><span class="he" lang="he" dir="rtl">גֶּבֶר</span></li><li class="row" data-s="mensch adam אדם"><span class="de">Mensch</span><span class="tr">Adam</span><span class="he" lang="he" dir="rtl">אָדָם</span></li><li class="row" data-s="menschen leute anaschim אנשים"><span class="de">Menschen, Leute</span><span class="tr">Anaschim</span><span class="he" lang="he" dir="rtl">אֲנָשִׁים</span></li><li class="row" data-s="messias maschiach משיח"><span class="de">Messias</span><span class="tr">Maschiach</span><span class="he" lang="he" dir="rtl">מָשִׁיחַ</span></li><li class="row" data-s="mit im עם"><span class="de">mit</span><span class="tr">Im</span><span class="he" lang="he" dir="rtl">עִם</span></li><li class="row" data-s="morgen boker בוקר"><span class="de">Morgen</span><span class="tr">Boker</span><span class="he" lang="he" dir="rtl">בּוֹקֶר</span></li><li class="row" data-s="moschee misgad מסגד"><span class="de">Moschee</span><span class="tr">Misgad</span><span class="he" lang="he" dir="rtl">מִסְגָּד</span></li><li class="row" data-s="mutter ima אמא"><span class="de">Mutter</span><span class="tr">Ima</span><span class="he" lang="he" dir="rtl">אִמָּא</span></li></ul></section>
+<section class="letter" id="N"><div class="letterhead"><h2>N</h2></div><ul class="rows"><li class="row" data-s="nacht laila לילה"><span class="de">Nacht</span><span class="tr">Laila</span><span class="he" lang="he" dir="rtl">לַיְלָה</span></li><li class="row" data-s="neben lejad ליד"><span class="de">neben</span><span class="tr">Lejad</span><span class="he" lang="he" dir="rtl">לְיַד</span></li><li class="row" data-s="neben auf der hand al jad על־יד"><span class="de">neben („auf der Hand“)</span><span class="tr">Al-Jad</span><span class="he" lang="he" dir="rtl">עַל־יָד</span></li><li class="row" data-s="nehmen er nahm lakach לקח"><span class="de">nehmen (er nahm)</span><span class="tr">Lakach</span><span class="he" lang="he" dir="rtl">לָקַח</span></li><li class="row" data-s="nein nicht lo לא"><span class="de">nein, nicht</span><span class="tr">Lo</span><span class="he" lang="he" dir="rtl">לֹא</span></li><li class="row" data-s="nichts klum כלום"><span class="de">nichts</span><span class="tr">Klum</span><span class="he" lang="he" dir="rtl">כְּלוּם</span></li><li class="row" data-s="noch od עוד"><span class="de">noch</span><span class="tr">Od</span><span class="he" lang="he" dir="rtl">עוֹד</span></li><li class="row" data-s="noch nicht adajin lo עדין לא"><span class="de">noch nicht</span><span class="tr">Adajin lo</span><span class="he" lang="he" dir="rtl">עֲדַיִן לֹא</span></li><li class="row" data-s="noch immer noch adajin עדין"><span class="de">noch, immer noch</span><span class="tr">Adajin</span><span class="he" lang="he" dir="rtl">עֲדַיִן</span></li><li class="row" data-s="norden zafon צפון"><span class="de">Norden</span><span class="tr">Zafon</span><span class="he" lang="he" dir="rtl">צָפוֹן</span></li></ul></section>
+<section class="letter" id="O"><div class="letterhead"><h2>O</h2></div><ul class="rows"><li class="row" data-s="ohne bli בלי"><span class="de">ohne</span><span class="tr">Bli</span><span class="he" lang="he" dir="rtl">בְּלִי</span></li><li class="row" data-s="onkel dod דוד"><span class="de">Onkel</span><span class="tr">Dod</span><span class="he" lang="he" dir="rtl">דּוֹד</span></li><li class="row" data-s="ort makom מקום"><span class="de">Ort</span><span class="tr">Makom</span><span class="he" lang="he" dir="rtl">מָקוֹם</span></li><li class="row" data-s="osten mizrach מזרח"><span class="de">Osten</span><span class="tr">Mizrach</span><span class="he" lang="he" dir="rtl">מִזְרָח</span></li></ul></section>
+<section class="letter" id="P"><div class="letterhead"><h2>P</h2></div><ul class="rows"><li class="row" data-s="plotzlich lefeta לפתע"><span class="de">plötzlich</span><span class="tr">Lefeta</span><span class="he" lang="he" dir="rtl">לְפֶתַע</span></li><li class="row" data-s="polizei mischtara משטרה"><span class="de">Polizei</span><span class="tr">Mischtara</span><span class="he" lang="he" dir="rtl">מִשְׁטָרָה</span></li><li class="row" data-s="polizisten schotrim שוטרים"><span class="de">Polizisten</span><span class="tr">Schotrim</span><span class="he" lang="he" dir="rtl">שׁוֹטְרִים</span></li><li class="row" data-s="post doar דואר"><span class="de">Post</span><span class="tr">Doar</span><span class="he" lang="he" dir="rtl">דּוֹאַר</span></li><li class="row" data-s="priester kohen כהן"><span class="de">Priester</span><span class="tr">Kohen</span><span class="he" lang="he" dir="rtl">כֹּהֵן</span></li><li class="row" data-s="prufen er prufte bachan בחן"><span class="de">prüfen (er prüfte)</span><span class="tr">Bachan</span><span class="he" lang="he" dir="rtl">בָּחַן</span></li><li class="row" data-s="prufung mivchan מבחן"><span class="de">Prüfung</span><span class="tr">Mivchan</span><span class="he" lang="he" dir="rtl">מִבְחָן</span></li></ul></section>
+<section class="letter" id="R"><div class="letterhead"><h2>R</h2></div><ul class="rows"><li class="row" data-s="regen geschem גשם"><span class="de">Regen</span><span class="tr">Geschem</span><span class="he" lang="he" dir="rtl">גֶּשֶׁם</span></li><li class="row" data-s="regen matar מטר"><span class="de">Regen</span><span class="tr">Matar</span><span class="he" lang="he" dir="rtl">מָטָר</span></li><li class="row" data-s="religion dat דת"><span class="de">Religion</span><span class="tr">Dat</span><span class="he" lang="he" dir="rtl">דָּת</span></li><li class="row" data-s="riese anak ענק"><span class="de">Riese</span><span class="tr">Anak</span><span class="he" lang="he" dir="rtl">עֲנָק</span></li><li class="row" data-s="ritter abir אביר"><span class="de">Ritter</span><span class="tr">Abir</span><span class="he" lang="he" dir="rtl">אַבִּיר</span></li></ul></section>
+<section class="letter" id="S"><div class="letterhead"><h2>S</h2></div><ul class="rows"><li class="row" data-s="salz melach מלח"><span class="de">Salz</span><span class="tr">Melach</span><span class="he" lang="he" dir="rtl">מֶלַח</span></li><li class="row" data-s="saule amud עמוד"><span class="de">Säule</span><span class="tr">Amud</span><span class="he" lang="he" dir="rtl">עַמּוּד</span></li><li class="row" data-s="schaf m w keves kivsa כבש כבשה"><span class="de">Schaf (m./w.)</span><span class="tr">Keves / Kivsa</span><span class="he" lang="he" dir="rtl">כֶּבֶשׂ / כִּבְשָׂה</span></li><li class="row" data-s="schicksal los goral גורל"><span class="de">Schicksal, Los</span><span class="tr">Goral</span><span class="he" lang="he" dir="rtl">גּוֹרָל</span></li><li class="row" data-s="schild schutz magen מגן"><span class="de">Schild, Schutz</span><span class="tr">Magen</span><span class="he" lang="he" dir="rtl">מָגֵן</span></li><li class="row" data-s="schlange nachasch נחש"><span class="de">Schlange</span><span class="tr">Nachasch</span><span class="he" lang="he" dir="rtl">נָחָשׁ</span></li><li class="row" data-s="schlussel mafte ach מפתח"><span class="de">Schlüssel</span><span class="tr">Mafte’ach</span><span class="he" lang="he" dir="rtl">מַפְתֵּחַ</span></li><li class="row" data-s="schmutz lichluch לכלוך"><span class="de">Schmutz</span><span class="tr">Lichluch</span><span class="he" lang="he" dir="rtl">לִכְלוּךְ</span></li><li class="row" data-s="schnell maher מהר"><span class="de">schnell</span><span class="tr">Maher</span><span class="he" lang="he" dir="rtl">מַהֵר</span></li><li class="row" data-s="schrank aron ארון"><span class="de">Schrank</span><span class="tr">Aron</span><span class="he" lang="he" dir="rtl">אָרוֹן</span></li><li class="row" data-s="schule haus des buches beit sefer בית־ספר"><span class="de">Schule („Haus des Buches“)</span><span class="tr">Beit-Sefer</span><span class="he" lang="he" dir="rtl">בֵּית־סֵפֶר</span></li><li class="row" data-s="schutzort machse מחסה"><span class="de">Schutzort</span><span class="tr">Machse</span><span class="he" lang="he" dir="rtl">מַחְסֶה</span></li><li class="row" data-s="schwer leber kaved כבד"><span class="de">schwer; Leber</span><span class="tr">Kaved</span><span class="he" lang="he" dir="rtl">כָּבֵד</span></li><li class="row" data-s="schwester achot אחות"><span class="de">Schwester</span><span class="tr">Achot</span><span class="he" lang="he" dir="rtl">אָחוֹת</span></li><li class="row" data-s="see agam אגם"><span class="de">See</span><span class="tr">Agam</span><span class="he" lang="he" dir="rtl">אֲגַם</span></li><li class="row" data-s="segen bracha ברכה"><span class="de">Segen</span><span class="tr">Bracha</span><span class="he" lang="he" dir="rtl">בְּרָכָה</span></li><li class="row" data-s="sehr me od מאוד"><span class="de">sehr</span><span class="tr">Me’od</span><span class="he" lang="he" dir="rtl">מְאוֹד</span></li><li class="row" data-s="sklave eved עבד"><span class="de">Sklave</span><span class="tr">Eved</span><span class="he" lang="he" dir="rtl">עֶבֶד</span></li><li class="row" data-s="sklaven avadim עבדים"><span class="de">Sklaven</span><span class="tr">Avadim</span><span class="he" lang="he" dir="rtl">עֲבָדִים</span></li><li class="row" data-s="sohn ben בן"><span class="de">Sohn</span><span class="tr">Ben</span><span class="he" lang="he" dir="rtl">בֵּן</span></li><li class="row" data-s="sorge de aga דאגה"><span class="de">Sorge</span><span class="tr">De’aga</span><span class="he" lang="he" dir="rtl">דְּאָגָה</span></li><li class="row" data-s="spat me uchar מאוחר"><span class="de">spät</span><span class="tr">Me’uchar</span><span class="he" lang="he" dir="rtl">מְאוּחָר</span></li><li class="row" data-s="spezialist mumche מומחה"><span class="de">Spezialist</span><span class="tr">Mumche</span><span class="he" lang="he" dir="rtl">מוּמְחֶה</span></li><li class="row" data-s="spiegel mar a מראה"><span class="de">Spiegel</span><span class="tr">Mar’a</span><span class="he" lang="he" dir="rtl">מַרְאָה</span></li><li class="row" data-s="stadt ir עיר"><span class="de">Stadt</span><span class="tr">Ir</span><span class="he" lang="he" dir="rtl">עִיר</span></li><li class="row" data-s="stein even אבן"><span class="de">Stein</span><span class="tr">Even</span><span class="he" lang="he" dir="rtl">אֶבֶן</span></li><li class="row" data-s="steuer die mas מס"><span class="de">Steuer (die)</span><span class="tr">Mas</span><span class="he" lang="he" dir="rtl">מַס</span></li><li class="row" data-s="suden darom דרום"><span class="de">Süden</span><span class="tr">Darom</span><span class="he" lang="he" dir="rtl">דָּרוֹם</span></li><li class="row" data-s="suss matok מתוק"><span class="de">süss</span><span class="tr">Matok</span><span class="he" lang="he" dir="rtl">מָתוֹק</span></li><li class="row" data-s="synagoge haus der versammlung beit knesset בית־כנסת"><span class="de">Synagoge („Haus der Versammlung“)</span><span class="tr">Beit-Knesset</span><span class="he" lang="he" dir="rtl">בֵּית־כְּנֶסֶת</span></li></ul></section>
+<section class="letter" id="T"><div class="letterhead"><h2>T</h2></div><ul class="rows"><li class="row" data-s="tal ebene bik a בקעה"><span class="de">Tal, Ebene</span><span class="tr">Bik’a</span><span class="he" lang="he" dir="rtl">בִּקְעָה</span></li><li class="row" data-s="tante doda דודה"><span class="de">Tante</span><span class="tr">Doda</span><span class="he" lang="he" dir="rtl">דּוֹדָה</span></li><li class="row" data-s="tasche hosentasche kis כיס"><span class="de">Tasche (Hosentasche)</span><span class="tr">Kis</span><span class="he" lang="he" dir="rtl">כִּיס</span></li><li class="row" data-s="teig bazek בצק"><span class="de">Teig</span><span class="tr">Bazek</span><span class="he" lang="he" dir="rtl">בָּצֵק</span></li><li class="row" data-s="tempel mikdasch מקדש"><span class="de">Tempel</span><span class="tr">Mikdasch</span><span class="he" lang="he" dir="rtl">מִקְדָּשׁ</span></li><li class="row" data-s="tochter bat בת"><span class="de">Tochter</span><span class="tr">Bat</span><span class="he" lang="he" dir="rtl">בַּת</span></li><li class="row" data-s="tomate agvanija עגבניה"><span class="de">Tomate</span><span class="tr">Agvanija</span><span class="he" lang="he" dir="rtl">עַגְבָנִיָּה</span></li><li class="row" data-s="trauben anavim ענבים"><span class="de">Trauben</span><span class="tr">Anavim</span><span class="he" lang="he" dir="rtl">עֲנָבִים</span></li><li class="row" data-s="traurig fem azuva עצובה"><span class="de">traurig (fem.)</span><span class="tr">Azuva</span><span class="he" lang="he" dir="rtl">עֲצוּבָה</span></li><li class="row" data-s="traurig mask azuv עצוב"><span class="de">traurig (mask.)</span><span class="tr">Azuv</span><span class="he" lang="he" dir="rtl">עָצוּב</span></li><li class="row" data-s="tur delet דלת"><span class="de">Tür</span><span class="tr">Delet</span><span class="he" lang="he" dir="rtl">דֶּלֶת</span></li><li class="row" data-s="turm migdal מגדל"><span class="de">Turm</span><span class="tr">Migdal</span><span class="he" lang="he" dir="rtl">מִגְדָּל</span></li><li class="row" data-s="turschwelle miftan מפתן"><span class="de">Türschwelle</span><span class="tr">Miftan</span><span class="he" lang="he" dir="rtl">מִפְתָּן</span></li></ul></section>
+<section class="letter" id="V"><div class="letterhead"><h2>V</h2></div><ul class="rows"><li class="row" data-s="vater abba אבא"><span class="de">Vater</span><span class="tr">Abba</span><span class="he" lang="he" dir="rtl">אַבָּא</span></li><li class="row" data-s="vergangenheit avar עבר"><span class="de">Vergangenheit</span><span class="tr">Avar</span><span class="he" lang="he" dir="rtl">עָבָר</span></li><li class="row" data-s="verkaufer verkaufen mocher machar מוכר מכר"><span class="de">Verkäufer / verkaufen</span><span class="tr">Mocher / Machar</span><span class="he" lang="he" dir="rtl">מוֹכֵר / מָכַר</span></li><li class="row" data-s="versammlung konferenz kenes כנס"><span class="de">Versammlung, Konferenz</span><span class="tr">Kenes</span><span class="he" lang="he" dir="rtl">כֶּנֶס</span></li><li class="row" data-s="versicherung bituach ביטוח"><span class="de">Versicherung</span><span class="tr">Bituach</span><span class="he" lang="he" dir="rtl">בִּיטוּחַ</span></li><li class="row" data-s="viehhirte ro e zon רועה צאן"><span class="de">Viehhirte</span><span class="tr">Ro’e-Zon</span><span class="he" lang="he" dir="rtl">רוֹעֵה צֹאן</span></li><li class="row" data-s="volk am עם"><span class="de">Volk</span><span class="tr">Am</span><span class="he" lang="he" dir="rtl">עַם</span></li><li class="row" data-s="voll male מלא"><span class="de">voll</span><span class="tr">Male</span><span class="he" lang="he" dir="rtl">מָלֵא</span></li><li class="row" data-s="von me et מאת"><span class="de">von</span><span class="tr">Me’et</span><span class="he" lang="he" dir="rtl">מֵאֵת</span></li><li class="row" data-s="vor bevor lifnei לפני"><span class="de">vor, bevor</span><span class="tr">Lifnei</span><span class="he" lang="he" dir="rtl">לִפְנֵי</span></li></ul></section>
+<section class="letter" id="W"><div class="letterhead"><h2>W</h2></div><ul class="rows"><li class="row" data-s="wagen kutsche agala עגלה"><span class="de">Wagen, Kutsche</span><span class="tr">Agala</span><span class="he" lang="he" dir="rtl">עֲגָלָה</span></li><li class="row" data-s="warum lama למה"><span class="de">warum?</span><span class="tr">Lama</span><span class="he" lang="he" dir="rtl">לָמָּה</span></li><li class="row" data-s="was ma מה"><span class="de">was?</span><span class="tr">Ma</span><span class="he" lang="he" dir="rtl">מָה</span></li><li class="row" data-s="wasser majim מים"><span class="de">Wasser</span><span class="tr">Majim</span><span class="he" lang="he" dir="rtl">מַיִם</span></li><li class="row" data-s="weg derech דרך"><span class="de">Weg</span><span class="tr">Derech</span><span class="he" lang="he" dir="rtl">דֶּרֶךְ</span></li><li class="row" data-s="weil denn ki כי"><span class="de">weil, denn</span><span class="tr">Ki</span><span class="he" lang="he" dir="rtl">כִּי</span></li><li class="row" data-s="weinberg kerem כרם"><span class="de">Weinberg</span><span class="tr">Kerem</span><span class="he" lang="he" dir="rtl">כֶּרֶם</span></li><li class="row" data-s="weiss lavan לבן"><span class="de">weiss</span><span class="tr">Lavan</span><span class="he" lang="he" dir="rtl">לָבָן</span></li><li class="row" data-s="wer mi מי"><span class="de">wer?</span><span class="tr">Mi</span><span class="he" lang="he" dir="rtl">מִי</span></li><li class="row" data-s="westen ma arav מערב"><span class="de">Westen</span><span class="tr">Ma’arav</span><span class="he" lang="he" dir="rtl">מַעֲרָב</span></li><li class="row" data-s="wetter mezeg avir מזג אויר"><span class="de">Wetter</span><span class="tr">Mezeg-Avir</span><span class="he" lang="he" dir="rtl">מֶזֶג אֲוִיר</span></li><li class="row" data-s="wie viel kama כמה"><span class="de">wie viel?</span><span class="tr">Kama</span><span class="he" lang="he" dir="rtl">כַּמָּה</span></li><li class="row" data-s="wie keizad כיצד"><span class="de">wie?</span><span class="tr">Keizad</span><span class="he" lang="he" dir="rtl">כֵּיצַד</span></li><li class="row" data-s="wind geist ruach רוח"><span class="de">Wind, Geist</span><span class="tr">Ruach</span><span class="he" lang="he" dir="rtl">רוּחַ</span></li><li class="row" data-s="wirklich mamasch ממש"><span class="de">wirklich</span><span class="tr">Mamasch</span><span class="he" lang="he" dir="rtl">מַמָּשׁ</span></li><li class="row" data-s="wo woher me ajin מאין"><span class="de">wo? woher?</span><span class="tr">Me’ajin</span><span class="he" lang="he" dir="rtl">מֵאַיִן</span></li><li class="row" data-s="wohnung dira דירה"><span class="de">Wohnung</span><span class="tr">Dira</span><span class="he" lang="he" dir="rtl">דִּירָה</span></li><li class="row" data-s="wolke anan ענן"><span class="de">Wolke</span><span class="tr">Anan</span><span class="he" lang="he" dir="rtl">עָנָן</span></li><li class="row" data-s="wort mila מלה"><span class="de">Wort</span><span class="tr">Mila</span><span class="he" lang="he" dir="rtl">מִלָּה</span></li><li class="row" data-s="wunsch misch ala משאלה"><span class="de">Wunsch</span><span class="tr">Misch’ala</span><span class="he" lang="he" dir="rtl">מִשְׁאָלָה</span></li><li class="row" data-s="wuste midbar מדבר"><span class="de">Wüste</span><span class="tr">Midbar</span><span class="he" lang="he" dir="rtl">מִדְבָּר</span></li></ul></section>
+<section class="letter" id="Z"><div class="letterhead"><h2>Z</h2></div><ul class="rows"><li class="row" data-s="zahl mispar מספר"><span class="de">Zahl</span><span class="tr">Mispar</span><span class="he" lang="he" dir="rtl">מִסְפָּר</span></li><li class="row" data-s="zelt ohel אוהל"><span class="de">Zelt</span><span class="tr">Ohel</span><span class="he" lang="he" dir="rtl">אוֹהֶל</span></li><li class="row" data-s="zitrone limon לימון"><span class="de">Zitrone</span><span class="tr">Limon</span><span class="he" lang="he" dir="rtl">לִימוֹן</span></li><li class="row" data-s="zukunft atid עתיד"><span class="de">Zukunft</span><span class="tr">Atid</span><span class="he" lang="he" dir="rtl">עָתִיד</span></li><li class="row" data-s="zum ersten mal larischona לראשונה"><span class="de">zum ersten Mal</span><span class="tr">Larischona</span><span class="he" lang="he" dir="rtl">לָרִאשׁוֹנָה</span></li><li class="row" data-s="zunge sprache laschon לשון"><span class="de">Zunge, Sprache</span><span class="tr">Laschon</span><span class="he" lang="he" dir="rtl">לָשׁוֹן</span></li><li class="row" data-s="zusammen bejachad ביחד"><span class="de">zusammen</span><span class="tr">Bejachad</span><span class="he" lang="he" dir="rtl">בְּיַחַד</span></li></ul></section>
+  </main>
+
+  <p id="noresults">Kein Treffer für <strong id="nrq"></strong>. Versuche es mit einem kürzeren Suchbegriff.</p>
+</div>
+
+<script>
+var VOCAB = {"ערב":["Abend (Nacht)","Erev (Laila)"],"לבד":["allein","Levad"],"לבש":["anziehen (er zog an)","Lavasch"],"עבודה":["Arbeit","Avoda"],"כעס":["Ärger, Zorn","Ka’as"],"צבא":["Armee","Zava"],"להתראות":["auf Wiedersehen","Lehitra’ot"],"על":["auf, über","Al"],"עין":["Auge","Ajin"],"מצין":["ausgezeichnet","Mezujan"],"מבחר":["Auswahl","Mivchar"],"מסלה":["Bahngleis, Bahn, Weg","Mesila"],"כדור":["Ball, Kugel","Kadur"],"בנק":["Bank","Bank"],"דב":["Bär","Dov"],"דבה":["Bärin","Duba"],"עץ":["Baum","Ez"],"עצים":["Bäume","Ezim"],"דין וחשבון":["Bericht, Rechenschaft","Din-wecheschbon"],"דבורה":["Biene","Dvora"],"בבקשה":["bitte","Bevakascha"],"מר":["bitter","Mar"],"כחול":["blau","Kachol"],"דם":["Blut","Dam"],"מכתב":["Brief","Michtav"],"דור":["Briefträger","Davar"],"לחם":["Brot","Lechem"],"לחמניה":["Brötchen","Lachmanija"],"אח":["Bruder","Ach"],"באר":["Brunnen","Be’er"],"מגלה":["Buchrolle","Megila"],"ארון הברית":["Bundeslade","Aron haBrit"],"גג":["Dach","Gag"],"גברת":["Dame, Frau","Gveret"],"מגן דוד":["Davidstern („Schild Davids“)","Magen David"],"דולפין":["Delfin","Dolfin"],"מטעמים":["Delikatessen, Süssigkeiten","Mat’amim"],"דכאון":["Depression","Dika’on"],"אדון":["der Herr (Adonai = „mein Herr“)","Adon"],"לכן":["deshalb, darum","Lachen"],"גרמניה":["Deutschland","Germanja"],"גנב":["Dieb","Ganav"],"כפר":["Dorf","Kfar"],"חשך":["Dunkelheit","Choschech"],"בעל":["Ehemann; Götze","Ba’al"],"כבוד":["Ehre","Kavod"],"ביצה":["Ei","Beiza"],"מעט":["ein wenig","Me’at"],"מלאך":["Engel","Mal’ach"],"אדמה":["Erde","Adama"],"גאולה":["Erlösung","Ge’ula"],"מבוגר":["erwachsen","Mevugar"],"אוכל":["Essen","Ochel"],"גולה":["Exil, Diaspora","Gola"],"מסע":["Fahrt, Reise","Masa"],"משפחה":["Familie","Mischpacha"],"כמעט":["fast, beinahe","Kim’at"],"אויב":["Feind","Ojev"],"שדה":["Feld","Sade"],"מועד":["Fest(e)","Mo’ed"],"חג":["Fest(e)","Chag"],"אש":["Feuer","Esch"],"דג":["Fisch","Dag"],"דיג":["Fischer","Dajag"],"דגל":["Flagge, Fahne","Degel"],"בקבוק":["Flasche","Bakbuk"],"כתם":["Fleck","Ketem"],"בשר":["Fleisch","Basar"],"שלום":["Friede","Schalom"],"פרי":["Frucht","Pri"],"אביב":["Frühling","Aviv"],"לתמיד":["für immer","Letamid"],"מזלג":["Gabel","Mazleg"],"גנה":["Garten","Gina"],"גן":["Garten","Gan"],"גן עדן":["Garten Eden","Gan-Eden"],"אורח":["Gast","Ore’ach"],"בנין":["Gebäude","Binjan"],"מול":["gegenüber","Mul"],"כסף":["Geld, Silber","Kesef"],"גלידה":["Glace","Glida"],"כוס":["Glas, Becher","Kos"],"אמונה":["Glaube","Emuna"],"חסד":["Gnade","Chesed"],"זהב":["Gold / Kupfer","Zahav"],"נחשת":["Gold / Kupfer","Nechoschet"],"אלוהים":["Gott","Elohim"],"דשא":["Gras, Rasen","Desche"],"עשב":["Gras, Rasen","Esev"],"גבול":["Grenze","Gvul"],"גדול":["gross","Gadol"],"מגרש":["Grundstück, Feld","Migrasch"],"טוב":["gut / schlecht, böse","Tov"],"רע":["gut / schlecht, böse","Ra"],"לילה טוב":["Gute Nacht","Laila tov"],"בוקר טוב":["Guten Morgen","Boker tov"],"בית":["Haus","Bajit"],"עברית":["Hebräisch","Ivrit"],"קדוש":["heilig","Kadosch"],"לב":["Herz","Lev"],"לבבי":["herzlich","Levavi"],"דבש":["Honig","Dvasch"],"כלב":["Hund / Hündin","Kelev"],"כלבה":["Hund / Hündin","Kalba"],"מאה":["hundert (100)","Mea"],"כובע":["Hut, Mütze","Kova"],"בסדר":["in Ordnung","Beseder"],"מענין":["interessiert","Me’unjan"],"כן":["ja","Ken"],"עתונאי":["Journalist","Itonai"],"בחורה":["junge Frau","Bachura"],"בחור":["junger Mann","Bachur"],"גמל":["Kamel","Gamal"],"מאבק":["Kampf","Ma’avak"],"גבינה":["Käse","Gvina"],"גת":["Kelter (Weinpresse)","Gat"],"דבדבן":["Kirsche","Duvdevan"],"כרית":["Kissen","Karit"],"דבק":["Kleber","Devek"],"בגדים":["Kleider","Begadim"],"מנזר":["Kloster","Minzar"],"כפתור":["Knopf","Kaftor"],"מלך":["König","Melech"],"מלכה":["Königin","Malka"],"גוף":["Körper","Guf"],"כח":["Kraft","Ko’ach"],"בית חולים":["Krankenhaus („Haus der Kranken“)","Beit-Cholim"],"כתר":["Krone","Keter"],"כד":["Krug","Kad"],"עוגה":["Kuchen","Uga"],"שה":["Lamm","Se"],"ארץ":["Land","Erez"],"לאט":["langsam","Le’at"],"מנהיג":["Leiter, Führer","Manhig"],"למד":["lernen (er lernte)","Lamad"],"אור":["Licht","Or"],"אהבה":["Liebe","Ahava"],"גבר":["Mann","Gever"],"אדם":["Mensch","Adam"],"אנשים":["Menschen, Leute","Anaschim"],"משיח":["Messias","Maschiach"],"עם":["mit","Im"],"בוקר":["Morgen","Boker"],"מסגד":["Moschee","Misgad"],"אמא":["Mutter","Ima"],"לילה":["Nacht","Laila"],"ליד":["neben","Lejad"],"על יד":["neben („auf der Hand“)","Al-Jad"],"לקח":["nehmen (er nahm)","Lakach"],"לא":["nein, nicht","Lo"],"כלום":["nichts","Klum"],"עוד":["noch","Od"],"עדין לא":["noch nicht","Adajin lo"],"עדין":["noch, immer noch","Adajin"],"צפון":["Norden","Zafon"],"בלי":["ohne","Bli"],"דוד":["Onkel","Dod"],"מקום":["Ort","Makom"],"מזרח":["Osten","Mizrach"],"לפתע":["plötzlich","Lefeta"],"משטרה":["Polizei","Mischtara"],"שוטרים":["Polizisten","Schotrim"],"דואר":["Post","Doar"],"כהן":["Priester","Kohen"],"בחן":["prüfen (er prüfte)","Bachan"],"מבחן":["Prüfung","Mivchan"],"גשם":["Regen","Geschem"],"מטר":["Regen","Matar"],"דת":["Religion","Dat"],"ענק":["Riese","Anak"],"אביר":["Ritter","Abir"],"מלח":["Salz","Melach"],"עמוד":["Säule","Amud"],"כבש":["Schaf (m./w.)","Keves"],"כבשה":["Schaf (m./w.)","Kivsa"],"גורל":["Schicksal, Los","Goral"],"מגן":["Schild, Schutz","Magen"],"נחש":["Schlange","Nachasch"],"מפתח":["Schlüssel","Mafte’ach"],"לכלוך":["Schmutz","Lichluch"],"מהר":["schnell","Maher"],"ארון":["Schrank","Aron"],"בית ספר":["Schule („Haus des Buches“)","Beit-Sefer"],"מחסה":["Schutzort","Machse"],"כבד":["schwer; Leber","Kaved"],"אחות":["Schwester","Achot"],"אגם":["See","Agam"],"ברכה":["Segen","Bracha"],"מאוד":["sehr","Me’od"],"עבד":["Sklave","Eved"],"עבדים":["Sklaven","Avadim"],"בן":["Sohn","Ben"],"דאגה":["Sorge","De’aga"],"מאוחר":["spät","Me’uchar"],"מומחה":["Spezialist","Mumche"],"מראה":["Spiegel","Mar’a"],"עיר":["Stadt","Ir"],"אבן":["Stein","Even"],"מס":["Steuer (die)","Mas"],"דרום":["Süden","Darom"],"מתוק":["süss","Matok"],"בית כנסת":["Synagoge („Haus der Versammlung“)","Beit-Knesset"],"בקעה":["Tal, Ebene","Bik’a"],"דודה":["Tante","Doda"],"כיס":["Tasche (Hosentasche)","Kis"],"בצק":["Teig","Bazek"],"מקדש":["Tempel","Mikdasch"],"בת":["Tochter","Bat"],"עגבניה":["Tomate","Agvanija"],"ענבים":["Trauben","Anavim"],"עצובה":["traurig (fem.)","Azuva"],"עצוב":["traurig (mask.)","Azuv"],"דלת":["Tür","Delet"],"מגדל":["Turm","Migdal"],"מפתן":["Türschwelle","Miftan"],"אבא":["Vater","Abba"],"עבר":["Vergangenheit","Avar"],"מוכר":["Verkäufer / verkaufen","Mocher"],"מכר":["Verkäufer / verkaufen","Machar"],"כנס":["Versammlung, Konferenz","Kenes"],"ביטוח":["Versicherung","Bituach"],"רועה צאן":["Viehhirte","Ro’e-Zon"],"מלא":["voll","Male"],"מאת":["von","Me’et"],"לפני":["vor, bevor","Lifnei"],"עגלה":["Wagen, Kutsche","Agala"],"למה":["warum?","Lama"],"מה":["was?","Ma"],"מים":["Wasser","Majim"],"דרך":["Weg","Derech"],"כי":["weil, denn","Ki"],"כרם":["Weinberg","Kerem"],"לבן":["weiss","Lavan"],"מי":["wer?","Mi"],"מערב":["Westen","Ma’arav"],"מזג אויר":["Wetter","Mezeg-Avir"],"כמה":["wie viel?","Kama"],"כיצד":["wie?","Keizad"],"רוח":["Wind, Geist","Ruach"],"ממש":["wirklich","Mamasch"],"מאין":["wo? woher?","Me’ajin"],"דירה":["Wohnung","Dira"],"ענן":["Wolke","Anan"],"מלה":["Wort","Mila"],"משאלה":["Wunsch","Misch’ala"],"מדבר":["Wüste","Midbar"],"מספר":["Zahl","Mispar"],"אוהל":["Zelt","Ohel"],"לימון":["Zitrone","Limon"],"עתיד":["Zukunft","Atid"],"לראשונה":["zum ersten Mal","Larischona"],"לשון":["Zunge, Sprache","Laschon"],"ביחד":["zusammen","Bejachad"]};
+</script>
+<script>
+(function(){
+  var input = document.getElementById('q');
+  var box = document.getElementById('searchbox');
+  var clearBtn = document.getElementById('clearbtn');
+  var nores = document.getElementById('noresults');
+  var nrq = document.getElementById('nrq');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('.row'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section.letter'));
+
+  function norm(s){
+    s = s.toLowerCase().replace(/\u00df/g,'ss');
+    try { s = s.normalize('NFD'); } catch(e){}
+    s = s.replace(/[\u0300-\u036f\u0591-\u05c7]/g,'');
+    s = s.replace(/[\u2019'"\u201e\u201c\u201d\-\u2013\u2014\/();,.?*]/g,' ');
+    return s.replace(/\s+/g,' ').trim();
+  }
+
+  function apply(){
+    var q = norm(input.value);
+    var terms = q ? q.split(' ') : [];
+    box.classList.toggle('hasvalue', input.value.length > 0);
+    var shown = 0;
+    rows.forEach(function(r){
+      var s = r.getAttribute('data-s');
+      var ok = terms.every(function(t){ return s.indexOf(t) !== -1; });
+      r.classList.toggle('hidden', !ok);
+      if(ok) shown++;
+    });
+    sections.forEach(function(sec){
+      sec.classList.toggle('hidden', sec.querySelectorAll('.row:not(.hidden)').length === 0);
+    });
+    nrq.textContent = '\u201e' + input.value.trim() + '\u201c';
+    nores.classList.toggle('show', shown === 0 && terms.length > 0);
+  }
+
+  input.addEventListener('input', apply);
+  clearBtn.addEventListener('click', function(){ input.value=''; apply(); input.focus(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === '/' && document.activeElement !== input){ e.preventDefault(); input.focus(); }
+    if(e.key === 'Escape' && document.activeElement === input){ input.value=''; apply(); }
+  });
+  apply();
+
+  /* ---------- Scanner ---------- */
+  var scanBtn = document.getElementById('scanbtn');
+  var scanFile = document.getElementById('scanfile');
+  var panel = document.getElementById('scanner');
+  var statusEl = document.getElementById('scanstatus');
+  var resultsEl = document.getElementById('scanresults');
+  var workerPromise = null;
+  var TJS = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+  var TJS_WORKER = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/worker.min.js';
+  var TJS_CORE = 'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.0';
+
+  function setStatus(t){ statusEl.textContent = t; }
+
+  function loadScript(src){
+    return new Promise(function(res, rej){
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = res;
+      s.onerror = function(){ rej(new Error('Script konnte nicht geladen werden')); };
+      document.head.appendChild(s);
+    });
+  }
+
+  function getWorker(){
+    if(workerPromise) return workerPromise;
+    workerPromise = (window.Tesseract ? Promise.resolve() : loadScript(TJS)).then(function(){
+      return window.Tesseract.createWorker('heb', 1, {
+        workerPath: TJS_WORKER,
+        corePath: TJS_CORE,
+        logger: function(m){
+          if(m.status === 'recognizing text') setStatus('Erkenne Text \u2026 ' + Math.round(m.progress*100) + ' %');
+          else if(m.status && m.progress < 1) setStatus('Lade Texterkennung \u2026');
+        }
+      });
+    });
+    workerPromise.catch(function(){ workerPromise = null; });
+    return workerPromise;
+  }
+
+  function toCanvas(file){
+    return new Promise(function(res, rej){
+      var img = new Image();
+      var url = URL.createObjectURL(file);
+      img.onload = function(){
+        var max = 1600;
+        var sc = Math.min(1, max / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * sc);
+        c.height = Math.round(img.height * sc);
+        var ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        var d = ctx.getImageData(0, 0, c.width, c.height);
+        var p = d.data;
+        for(var i = 0; i < p.length; i += 4){
+          var g = 0.299*p[i] + 0.587*p[i+1] + 0.114*p[i+2];
+          g = (g - 128) * 1.25 + 136;
+          g = g < 0 ? 0 : (g > 255 ? 255 : g);
+          p[i] = p[i+1] = p[i+2] = g;
+        }
+        ctx.putImageData(d, 0, 0);
+        URL.revokeObjectURL(url);
+        res(c);
+      };
+      img.onerror = function(){ URL.revokeObjectURL(url); rej(new Error('Bild konnte nicht gelesen werden')); };
+      img.src = url;
+    });
+  }
+
+  function hebKey(s){
+    s = s.replace(/\u05be/g,' ').replace(/[\u0591-\u05c7]/g,'');
+    s = s.replace(/[^\u05d0-\u05ea ]/g,' ');
+    return s.replace(/\s+/g,' ').trim();
+  }
+  var FINALS = {'\u05da':'\u05db','\u05dd':'\u05de','\u05df':'\u05e0','\u05e3':'\u05e4','\u05e5':'\u05e6'};
+  function definalize(s){ return s.replace(/[\u05da\u05dd\u05df\u05e3\u05e5]/g, function(c){ return FINALS[c]; }); }
+
+  function findEntry(k){
+    if(VOCAB[k]) return VOCAB[k];
+    var dk = definalize(k);
+    for(var key in VOCAB){ if(definalize(key) === dk) return VOCAB[key]; }
+    return null;
+  }
+
+  function card(heb, de, sub, found){
+    var li = document.createElement('li');
+    li.className = 'scard';
+    var h = document.createElement('span'); h.className='she'; h.lang='he'; h.textContent = heb;
+    var d = document.createElement('span'); d.className='sde' + (found ? ' ok' : ''); d.textContent = de;
+    var s = document.createElement('span'); s.className='ssub';
+    if(typeof sub === 'string'){ s.textContent = sub; } else if(sub){ s.appendChild(sub); }
+    li.appendChild(h); li.appendChild(d); li.appendChild(s);
+    resultsEl.appendChild(li);
+    return {de: d, sub: s};
+  }
+
+  function gLink(word){
+    var a = document.createElement('a');
+    a.href = 'https://translate.google.com/?sl=iw&tl=de&text=' + encodeURIComponent(word);
+    a.target = '_blank'; a.rel = 'noopener';
+    a.textContent = 'Im Google \u00dcbersetzer \u00f6ffnen';
+    return a;
+  }
+
+  function autoTranslate(word, slots){
+    slots.de.textContent = '\u00dcbersetze \u2026';
+    fetch('https://api.mymemory.translated.net/get?q=' + encodeURIComponent(word) + '&langpair=he|de')
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        var t = j && j.responseData && j.responseData.translatedText;
+        if(t && !/MYMEMORY WARNING/i.test(t)){
+          slots.de.textContent = t;
+          var frag = document.createDocumentFragment();
+          frag.appendChild(document.createTextNode('automatisch \u00fcbersetzt, nicht in deiner Liste \u00b7 '));
+          frag.appendChild(gLink(word));
+          slots.sub.textContent = '';
+          slots.sub.appendChild(frag);
+        } else { throw new Error('leer'); }
+      })
+      .catch(function(){
+        slots.de.textContent = 'Nicht in deiner Liste';
+        slots.sub.textContent = '';
+        slots.sub.appendChild(gLink(word));
+      });
+  }
+
+  function handleWords(tokens){
+    resultsEl.textContent = '';
+    var shownKeys = {};
+    var any = false;
+    var autos = 0;
+    var i = 0;
+    while(i < tokens.length){
+      var k1 = tokens[i];
+      var pair = (i + 1 < tokens.length) ? (k1 + ' ' + tokens[i+1]) : null;
+      var entry, used = 1, kUsed = k1;
+      if(pair && findEntry(pair)){ entry = findEntry(pair); kUsed = pair; used = 2; }
+      else { entry = findEntry(k1); }
+      if(!shownKeys[kUsed]){
+        shownKeys[kUsed] = true;
+        any = true;
+        if(entry){
+          card(kUsed, entry[0], entry[1] + ' \u00b7 aus deiner Liste', true);
+        } else if(kUsed.length >= 2){
+          if(autos < 8){
+            autos++;
+            autoTranslate(kUsed, card(kUsed, '\u2026', '', false));
+          } else {
+            var slots = card(kUsed, 'Nicht in deiner Liste', '', false);
+            slots.sub.appendChild(gLink(kUsed));
+          }
+        } else {
+          shownKeys[kUsed] = true; any = any || false;
+        }
+      }
+      i += used;
+    }
+    setStatus(any ? 'Erkannte W\u00f6rter:' : 'Keine hebr\u00e4ischen W\u00f6rter erkannt. Versuche ein sch\u00e4rferes, n\u00e4heres Foto.');
+  }
+
+  function scan(file){
+    panel.classList.add('show');
+    resultsEl.textContent = '';
+    setStatus('Lade Texterkennung \u2026');
+    panel.scrollIntoView({block:'nearest'});
+    Promise.all([getWorker(), toCanvas(file)])
+      .then(function(vals){
+        setStatus('Erkenne Text \u2026');
+        return vals[0].recognize(vals[1]);
+      })
+      .then(function(out){
+        var raw = (out && out.data && out.data.text) || '';
+        var tokens = hebKey(raw).split(' ').filter(function(w){ return w.length > 0; });
+        handleWords(tokens);
+      })
+      .catch(function(){
+        setStatus('Der Scanner konnte die Texterkennung nicht laden. Auf dem Claude-Link ist das blockiert \u2014 nutze die Vercel-Version oder \u00f6ffne die Datei lokal.');
+      });
+  }
+
+  scanBtn.addEventListener('click', function(){ scanFile.click(); });
+  scanFile.addEventListener('change', function(){
+    if(scanFile.files && scanFile.files[0]) scan(scanFile.files[0]);
+    scanFile.value = '';
+  });
+  document.getElementById('scanclose').addEventListener('click', function(){ panel.classList.remove('show'); });
+})();
+</script>
+</body>
+</html>
